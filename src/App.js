@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {Cloudinary} from "@cloudinary/url-gen";
+import {AdvancedImage} from '@cloudinary/react';
+import {fill} from '@cloudinary/url-gen/actions/resize';
 
-function App() {
+
+const App = () => {
+  const cld = new Cloudinary({  // Create a Cloudinary instance and set your cloud name.
+    cloud: {
+      cloudName: 'maulight'
+    }
+  });
+
+  const myImage= cld.image('cld-sample-3.jpg');
+  myImage.resize(fill().width(350).height(350));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <AdvancedImage cldImg= {myImage} />
     </div>
-  );
-}
+  )
+
+};
 
 export default App;
